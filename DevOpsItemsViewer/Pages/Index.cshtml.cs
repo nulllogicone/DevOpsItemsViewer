@@ -13,13 +13,13 @@ namespace DevOpsItemsViewer.Pages
     public class IndexModel : PageModel
     {
         readonly IConfiguration config;
-        public string DevOpsUri { get; set; }
+        public string DevOpsUrl { get; set; }
         public IEnumerable<WorkItem> WorkItems;
 
         public IndexModel(IConfiguration config)
         {
             this.config = config;
-            DevOpsUri = config.GetValue<string>("DevOpsUrl");
+            DevOpsUrl = config.GetValue<string>("DevOpsUrl");
         }
 
         public async Task OnGetAsync(Guid? queryGuid)
@@ -29,7 +29,7 @@ namespace DevOpsItemsViewer.Pages
                 return;
             }
             var devops = new DevOpsContext(
-                DevOpsUri,
+                DevOpsUrl,
                 config.GetValue<string>("DevOpsAccessToken"));
             var workItemRefs = await devops.GetWorkItemReferencesByQueryGuidAsync(queryGuid.Value);
             var ids = workItemRefs.Select(w => w.Id).ToArray().Take(10);
@@ -39,7 +39,9 @@ namespace DevOpsItemsViewer.Pages
             {
                 try
                 {
-                    var t = wi.Fields["System.Description"];
+                    var desc = wi.Fields["System.Description"];
+                    var state = wi.Fields["System.State"];
+
                     var d = wi.Fields.GetValueOrDefault("System.Description");
                 }
                 catch (Exception)
@@ -51,7 +53,7 @@ namespace DevOpsItemsViewer.Pages
         }
 
         public string GetUrlToWorkItem(WorkItem wi) {
-            return $"{DevOpsUri}/_workitems/edit/{wi.Id}";
+            return $"{DevOpsUrl}/_workitems/edit/{wi.Id}";
         }
     }
 }
