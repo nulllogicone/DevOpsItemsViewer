@@ -13,10 +13,10 @@
 {
 <div class="card" style="margin-bottom:10px;">
 
-    <div class="card-body" style="border-left:solid 3px @DevOpsStyle.GetBorderColorByItemType(wi.Fields["System.WorkItemType"].ToString());">
+    <div class="card-body" style="border-left:solid 3px @DevOpsStyle.GetBorderColorByItemType(wi);">
         <small style="float:right;">
             <a target="devops" href="@Model.GetUrlToWorkItem(wi)">@wi.Fields["System.WorkItemType"] @wi.Id</a><br />
-            <span class="badge @DevOpsStyle.GetBadgeStyleByItemState(wi.Fields["System.State"].ToString())">@wi.Fields["System.State"]</span>
+            <span class="badge @DevOpsStyle.GetBadgeStyleByItemState(wi)">@wi.Fields["System.State"]</span>
         </small>
         <h4 class="card-title">@wi.Fields["System.Title"]</h4>
         @Html.Raw(@wi.Fields.GetValueOrDefault("System.Description"))

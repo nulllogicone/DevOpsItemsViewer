@@ -1,10 +1,13 @@
-﻿namespace DevOpsItemsViewer
+﻿using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
+
+namespace DevOpsItemsViewer
 {
     public static class DevOpsStyle
     {
-        public static string GetBorderColorByItemType(string itemType)
+        public static string GetBorderColorByItemType(WorkItem workItem)
         {
-            switch (itemType)
+            var wiType = workItem.Fields["System.WorkItemType"];
+            switch (wiType)
             {
                 case "Epic":
                     return "#ff7b00";
@@ -22,9 +25,10 @@
             }
         }
 
-        public static string GetBadgeStyleByItemState(string itemState)
+        public static string GetBadgeStyleByItemState(WorkItem workItem)
         {
-            switch (itemState)
+            var state = workItem.Fields["System.State"];
+            switch (state)
             {
                 case "In Progress":
                     return "badge-success";
