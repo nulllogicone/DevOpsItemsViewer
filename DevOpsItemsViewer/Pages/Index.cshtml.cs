@@ -32,7 +32,7 @@ namespace DevOpsItemsViewer.Pages
                 DevOpsUri,
                 config.GetValue<string>("DevOpsAccessToken"));
             var workItemRefs = await devops.GetWorkItemReferencesByQueryGuidAsync(queryGuid.Value);
-            var ids = workItemRefs.Select(w => w.Id).ToArray().Take(20);
+            var ids = workItemRefs.Select(w => w.Id).ToArray().Take(10);
             WorkItems = await devops.GetWorkItemsAsync(ids);
 
             foreach (var wi in WorkItems)

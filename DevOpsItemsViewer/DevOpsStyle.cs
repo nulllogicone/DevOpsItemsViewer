@@ -5,7 +5,6 @@
         public static string GetBorderColorByItemType(string itemType) {
             switch (itemType)
             {
-
                 case "Epic":
                     return "#ff7b00";
                 case "Feature":
