@@ -11,6 +11,8 @@
                     return "#773b93";
                 case "Product Backlog Item":
                     return "#009ccc";
+                case "Task":
+                    return "#f2cb1d";
                 case "Bug":
                     return "red";
                 default:
